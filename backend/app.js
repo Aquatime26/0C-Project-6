@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const stuffRoutes = require('./routes/stuff');
+const userRoutes = require('./routes/user');
 
 const uri = "mongodb+srv://Aquatime26:jvWu%23cP%249H_nc9h@clusteraa.qenjevu.mongodb.net/?retryWrites=true&w=majority&appName=ClusterAA";
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -27,8 +28,9 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 app.use('/api/stuff', stuffRoutes);
+app.use('/api/auth', userRoutes);
 
-//Configuaration de multer pour la gestion des fichiers
+//Configuration de multer pour la gestion des fichiers
 // const storage = multer.diskStorage({
 
 module.exports = app;

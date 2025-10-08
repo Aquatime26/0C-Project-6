@@ -4,9 +4,6 @@ const router = express.Router();
 const stuffCtrl = require('../controllers/control');
 
 // Routes
-// Route pour inscription et connexion
-router.post('/signup', stuffCtrl.signup);
-
 //Créer un nouvel élément
 router.post('/', stuffCtrl.createThing);
 
