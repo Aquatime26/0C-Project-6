@@ -30,7 +30,4 @@ app.use(bodyParser.json());
 app.use('/api/stuff', stuffRoutes);
 app.use('/api/auth', userRoutes);
 
-//Configuration de multer pour la gestion des fichiers
-// const storage = multer.diskStorage({
-
 module.exports = app;
