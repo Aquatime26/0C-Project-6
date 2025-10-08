@@ -1,23 +1,24 @@
 const express = require('express');
+const auth = require('../middleware/auth');
 const router = express.Router();
 
 const stuffCtrl = require('../controllers/control');
 
 // Routes
 //Créer un nouvel élément
-router.post('/', stuffCtrl.createThing);
+router.post('/', auth, stuffCtrl.createThing);
 
 //Modifier un élément
-router.put('/:id', stuffCtrl.modifieThing);
+router.put('/:id', auth, stuffCtrl.modifieThing);
 
 //Supprimer un élément
-router.delete('/:id', stuffCtrl.deleteThing);
+router.delete('/:id', auth, stuffCtrl.deleteThing);
 
 //Récupérer tous les éléments
-router.get('/' , stuffCtrl.getAllThings);
+router.get('/' , auth, stuffCtrl.getAllThings);
 
 //Récupérer un élément
-router.get('/:id', stuffCtrl.getOneThing);
+router.get('/:id', auth, stuffCtrl.getOneThing);
 
 
 module.exports = router;
