@@ -1,12 +1,13 @@
 const express = require('express');
 const auth = require('../middleware/auth');
 const router = express.Router();
+const multer = require('../middleware/multer-config');
 
 const stuffCtrl = require('../controllers/control');
 
 // Routes
 //Créer un nouvel élément
-router.post('/', auth, stuffCtrl.createThing);
+router.post('/', auth, multer, stuffCtrl.createThing);
 
 //Modifier un élément
 router.put('/:id', auth, stuffCtrl.modifieThing);
