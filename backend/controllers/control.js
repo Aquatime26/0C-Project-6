@@ -1,4 +1,35 @@
 const Thing = require('../models/Thing');
+const bcrypt = require('bcrypt');
+
+// const mongoose = require('mongoose');
+// const uniqueValidator = require('mongoose-unique-validator');
+
+// const userSchema = mongoose.Schema({
+//   email: { type: String, required: true, unique: true },
+//   password: { type: String, required: true }
+// });
+
+// userSchema.plugin(uniqueValidator);
+
+// module.exports = mongoose.model('User', userSchema);
+
+exports.signup = async (req, res, next) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const user = new User({
+      email: req.body.email,
+      password: hashedPassword
+    });
+    await user.save();
+    res.status(201).json({ message: 'Utilisateur créé !' });
+  } catch (error) {
+    if (error.code === 11000) {
+      res.status(400).json({ message: 'Email déjà utilisé !' });
+  } else {
+      res.status(500).json({ message: 'Erreur serveur !' });
+    }
+  }
+};
 
 exports.createThing = (req, res, next) => {
   delete req.body._id;
