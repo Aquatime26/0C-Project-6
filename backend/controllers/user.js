@@ -2,6 +2,7 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
 
+// Route d'Inscription
 exports.signup = async (req, res, next) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -20,6 +21,7 @@ exports.signup = async (req, res, next) => {
   }
 };
 
+// Route de Connexion
 exports.login = async (req, res, next) => {
     User.findOne({ email: req.body.email })
     .then(user => {

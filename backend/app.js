@@ -2,8 +2,10 @@ const express = require('express');
 const multer = require('multer');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const fs = require('fs');
+const path = require('path');
 
-const stuffRoutes = require('./routes/stuff');
+const bookRoutes = require('./routes/book');
 const userRoutes = require('./routes/user');
 
 const uri = "mongodb+srv://Aquatime26:jvWu%23cP%249H_nc9h@clusteraa.qenjevu.mongodb.net/?retryWrites=true&w=majority&appName=ClusterAA";
@@ -27,8 +29,8 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
-app.use('/api/stuff', stuffRoutes);
+app.use('/api/books', bookRoutes);
 app.use('/api/auth', userRoutes);
-app.user('/images', express.static(path.join(__dirname, 'images')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 module.exports = app;
