@@ -86,7 +86,7 @@ function Book() {
             rating={rating}
             setRating={setRating}
             setBook={setBook}
-            id={book.id}
+            id={book?._id} 
           />
         </div>
       </div>

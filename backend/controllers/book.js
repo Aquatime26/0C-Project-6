@@ -73,3 +73,53 @@ exports.deleteBook = (req, res, next) => {
            res.status(500).json({ error });
        });
 };
+
+// Noter un livre
+exports.rateBook = async (req, res, next) => {
+  try {
+    const bookId = req.params.id;
+    const userId = req.auth?.userId;
+
+    // Vérifications de base
+    if (!bookId) return res.status(400).json({ message: 'Book ID missing' });
+    if (!userId) return res.status(401).json({ message: 'User not authenticated' });
+
+    const book = await Book.findById(bookId);
+    if (!book) return res.status(404).json({ message: 'Livre non trouvé' });
+
+    // Empêcher l’auteur de noter son propre livre
+    if (userId === book.userId) {
+      return res.status(403).json({ message: 'Vous ne pouvez pas noter votre propre livre' });
+    }
+
+    // Récupérer la note depuis le corps de la requête
+    const { grade, rating } = req.body;
+    const finalGrade = Number(grade ?? rating);
+
+    if (isNaN(finalGrade) || finalGrade < 0 || finalGrade > 5) {
+      return res.status(400).json({ message: 'Note invalide, doit être un nombre entre 0 et 5' });
+    }
+
+    // Vérifier si l'utilisateur a déjà noté le livre
+    const existingRatingIndex = book.ratings.findIndex(r => r.userId === userId);
+
+    if (existingRatingIndex !== -1) {
+      // Mettre à jour la note existante
+      book.ratings[existingRatingIndex].grade = finalGrade;
+    } else {
+      // Ajouter une nouvelle note
+      book.ratings.push({ userId, grade: finalGrade });
+    }
+
+    // Recalculer la moyenne sur toutes les notes
+    const totalGrades = book.ratings.reduce((sum, r) => sum + Number(r.grade), 0);
+    book.averageRating = totalGrades / book.ratings.length;
+
+    await book.save();
+
+    res.status(200).json(book);
+  } catch (error) {
+    console.error('Erreur dans rateBook:', error);
+    res.status(500).json({ error: 'Erreur serveur lors de l’ajout de la note' });
+  }
+};

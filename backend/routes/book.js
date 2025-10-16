@@ -22,4 +22,10 @@ router.put('/:id', auth, multer, bookCtrl.modifyBook);
 //Supprimer un élément
 router.delete('/:id', auth, multer, bookCtrl.deleteBook);
 
+// Noter un livre
+router.post('/:id/rating', auth, bookCtrl.rateBook);
+
+// // Les 3 meilleurs livres 
+// router.get('/best-rated', bookCtrl.getBestRatedBooks);
+
 module.exports = router;
