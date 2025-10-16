@@ -8,13 +8,13 @@ const bookCtrl = require('../controllers/book.js');
 // Routes
 
 //Récupérer tous les éléments
-router.get('/' , auth, bookCtrl.getAllBooks);
+router.get('/' , bookCtrl.getAllBooks);
 
 //Créer un nouvel élément
 router.post('/', auth, multer, bookCtrl.createBook);
 
 //Récupérer un élément
-router.get('/:id', auth, bookCtrl.getOneBook);
+router.get('/:id', bookCtrl.getOneBook);
 
 //Modifier un élément
 router.put('/:id', auth, multer, bookCtrl.modifyBook);
