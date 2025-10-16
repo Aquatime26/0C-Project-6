@@ -7,7 +7,7 @@ function BestRatedBooks() {
   const { bestRatedBooks } = useBestRatedBooks();
 
   const bestRatedBooksContent = bestRatedBooks.length > 0 ? (
-    bestRatedBooks.map((elt) => <BookItem key={`book-${elt.id}`} book={elt} size={3} />)
+    bestRatedBooks.map((elt) => <BookItem key={`book-${elt._id}`} book={elt} size={3} />)
   ) : <h3>Aucune recommendation</h3>;
 
   return (

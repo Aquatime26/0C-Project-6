@@ -7,6 +7,9 @@ const bookCtrl = require('../controllers/book.js');
 
 // Routes
 
+// Les 3 meilleurs livres 
+router.get('/bestrating', bookCtrl.getBestRatedBooks);
+
 //Récupérer tous les éléments
 router.get('/' , bookCtrl.getAllBooks);
 
@@ -24,8 +27,5 @@ router.delete('/:id', auth, multer, bookCtrl.deleteBook);
 
 // Noter un livre
 router.post('/:id/rating', auth, bookCtrl.rateBook);
-
-// // Les 3 meilleurs livres 
-// router.get('/best-rated', bookCtrl.getBestRatedBooks);
 
 module.exports = router;

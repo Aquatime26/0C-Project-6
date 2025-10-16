@@ -123,3 +123,19 @@ exports.rateBook = async (req, res, next) => {
     res.status(500).json({ error: 'Erreur serveur lors de l’ajout de la note' });
   }
 };
+
+// Les 3 meilleurs livres
+exports.getBestRatedBooks = async (req, res) => {
+  try {
+    // Récupère tous les livres triés par averageRating décroissant, limite 3
+    const books = await Book.find()
+      .sort({ averageRating: -1 })
+      .limit(3)
+      .lean(); // pour retourner un objet JS simple
+
+    res.status(200).json(books);
+  } catch (error) {
+    console.error('Erreur getBestRatedBooks:', error);
+    res.status(500).json({ error: 'Erreur serveur lors de la récupération des meilleurs livres' });
+  }
+};
