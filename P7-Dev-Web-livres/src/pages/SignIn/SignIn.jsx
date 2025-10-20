@@ -40,7 +40,8 @@ function SignIn({ setUser }) {
       }
     } catch (err) {
       console.log(err);
-      setNotification({ error: true, message: err.message });
+      const errorMessage = err.response?.data?.message || 'Une erreur est survenue';
+      setNotification({ error: true, message: errorMessage });
       console.log('Some error occured during signing in: ', err);
     } finally {
       setIsLoading(false);
@@ -64,8 +65,9 @@ function SignIn({ setUser }) {
       }
       setNotification({ error: false, message: 'Votre compte a bien été créé, vous pouvez vous connecter' });
     } catch (err) {
-      setNotification({ error: true, message: err.message });
       console.log('Some error occured during signing up: ', err);
+      const errorMessage = err.response?.data?.message || 'Une erreur est survenue lors de l’inscription';
+      setNotification({ error: true, message: errorMessage });
     } finally {
       setIsLoading(false);
     }
