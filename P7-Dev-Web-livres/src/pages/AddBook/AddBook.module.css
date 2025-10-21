@@ -8,6 +8,15 @@
     flex-direction: column;
 }
 
+.Container h1 {
+    align-self: center;
+    margin-top: 20px;
+}
+
+.subtitle {
+    align-self: center;
+}
+
 .Container p {
     font-family: "Libre Baskerville", serif;
     font-size: 16px;

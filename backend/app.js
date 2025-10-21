@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const multer = require('multer');
 const bodyParser = require('body-parser');
@@ -8,9 +10,8 @@ const path = require('path');
 const bookRoutes = require('./routes/book');
 const userRoutes = require('./routes/user');
 
-const uri = "mongodb+srv://Aquatime26:jvWu%23cP%249H_nc9h@clusteraa.qenjevu.mongodb.net/?retryWrites=true&w=majority&appName=ClusterAA";
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-mongoose.connect(uri, {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })

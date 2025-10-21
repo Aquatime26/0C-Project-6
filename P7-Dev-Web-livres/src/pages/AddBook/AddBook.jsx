@@ -26,7 +26,7 @@ function AddBook() {
         {!created ? (
           <>
             <h1>Ajouter un livre</h1>
-            <p>tous les champs sont obligatoires</p>
+            <p className={styles.subtitle} >tous les champs sont obligatoires</p>
             <BookForm validate={setCreated} />
           </>
         ) : (
