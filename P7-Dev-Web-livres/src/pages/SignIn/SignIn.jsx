@@ -6,6 +6,7 @@ import { API_ROUTES, APP_ROUTES } from '../../utils/constants';
 import { useUser } from '../../lib/customHooks';
 import { storeInLocalStorage } from '../../lib/common';
 import { ReactComponent as Logo } from '../../images/Logo.svg';
+import BackArrow from '../../components/BackArrow/BackArrow';
 import styles from './SignIn.module.css';
 
 function SignIn({ setUser }) {
@@ -75,6 +76,7 @@ function SignIn({ setUser }) {
   const errorClass = notification.error ? styles.Error : null;
   return (
     <div className={`${styles.SignIn} container`}>
+      <BackArrow />
       <Logo />
       <div className={`${styles.Notification} ${errorClass}`}>
         {notification.message.length > 0 && <p>{notification.message}</p>}

@@ -16,7 +16,7 @@ function App() {
   const { connectedUser } = useUser();
   const location = useLocation();
 
-  const hideFooter = location.pathname === APP_ROUTES.SIGN_IN;
+  const hideHeaderandFooter = location.pathname === APP_ROUTES.SIGN_IN;
 
   useEffect(() => {
     setUser(connectedUser);
@@ -24,7 +24,7 @@ function App() {
   return (
       <>
         <ScrollToTop />
-        <Header user={user} setUser={setUser} />
+        {!hideHeaderandFooter && <Header user={user} setUser={setUser} />} {/* Header masqué sur la page de connexion */}
         <Routes>
           <Route index element={<Home />} />
           <Route path={APP_ROUTES.SIGN_IN} element={<SignIn setUser={setUser} />} />
@@ -32,7 +32,7 @@ function App() {
           <Route path={APP_ROUTES.UPDATE_BOOK} element={<UpdateBook />} />
           <Route path={APP_ROUTES.ADD_BOOK} element={<AddBook />} />
         </Routes>
-        {!hideFooter && <Footer />} {/* Footer masqué sur la page de connexion */}
+        {!hideHeaderandFooter && <Footer />} {/* Footer masqué sur la page de connexion */}
       </>
   );
 }
