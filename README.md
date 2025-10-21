@@ -20,7 +20,7 @@ Projet réalisé lors de ma formation de Développer Web, avec OpenClassroom
 
 ## Installation
 
-### Clôner le dépot
+**Clôner le dépot**
 git clone 
 
 **cd P7-Dev-Web-Livres**
@@ -28,6 +28,17 @@ npm install
 
 **backend**
 npm install
+
+### Configuration
+Copier le fichier .env.example et créer un fichier .env à la racine du projet
+Remplir les variable du fichier .env avec tes informations personnelles
+
+-> Le port Backend
+-> l'url de ta base de données MongoDB
+-> Ta clé secrète pour ton JsonWebToken
+-> Le port FrontEnd (pas obligatoire)
+
+(NOTE pour l'examinateur : je vous enverrais directement mon propre fichier .env en parallèle du repo github pour que vous puissiez mettre mes propres informations)
 
 #### Lancer l'application
 
